@@ -14,62 +14,52 @@ Router.configure({
   notFoundTemplate: 'notFound',
 });
 
-// Filters
-
-var filters = {
-
-  myFilter: function () {
-    // do something
-  },
-
-  isLoggedIn: function() {
-    if (!(Meteor.loggingIn() || Meteor.user())) {
-      alert('Please Log In First.')
-      this.stop();
-    }
-  }
-
-}
-
-Router.onBeforeAction(filters.myFilter, {only: ['items']});
-
 // Routes
 
 Router.map(function() {
 
-  // Items
+  // Skills
 
-  this.route('items', {
+  this.route('skills', {
     waitOn: function () {
-      return Meteor.subscribe('allItems');
+      return Meteor.subscribe('allSkills');
     },
     data: function () {
-      return {
-        items: Items.find()
-      }
+      return Skills.find();
     }
   });
 
-  this.route('item', {
-    path: '/items/:_id',
+  this.route('skill', {
+    path: '/skills/:_id',
     waitOn: function () {
-      return Meteor.subscribe('singleItem', this.params._id);
+      return [Meteor.subscribe('singleSkill', this.params._id),
+              Meteor.subscribe('skillCompanies', this.params._id)];
     },
     data: function () {
-      return {
-        item: Items.findOne(this.params._id)
-      }
+      return Skills.findOne(this.params._id); 
     }
   });
 
+
+  this.route('company', {
+    path: '/companies/:_id',
+    waitOn: function () {
+      return [Meteor.subscribe('singleCompany', this.params._id),
+              Meteor.subscribe('companyStack', this.params._id)];
+    },
+    data: function () {
+      return {
+        company: Companies.findOne(this.params._id),
+        stack: Skills.find().fetch()
+      }; 
+    }
+  });
 
   // Pages
 
-  this.route('homepage', {
+  this.route('home', {
     path: '/'
   });
-
-  this.route('content');
 
   // Users
 

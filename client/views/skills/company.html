@@ -1,0 +1,20 @@
+<template name="company">
+  <div class="container">
+    {{#with company}}
+      <img class="company-icon" src="{{logo_url}}">
+      <div class="company-name"><h2>{{name}}</h2></div>
+      <hr>
+    {{/with}}
+      <div class="row">
+        {{#each stack}}
+          <div class="col-md-3">
+            <a href="{{pathFor "skill"}}">
+              <div class="well">
+                <div class="company-name">{{display_name}}</div>
+              </div>
+            </a>
+          </div>
+        {{/each}}
+      </div>
+  </div>
+</template>

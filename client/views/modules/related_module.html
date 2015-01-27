@@ -1,0 +1,25 @@
+<template name="related_module">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Top Related Skills</h3></div>
+      <div class="panel-body">
+        <div class="col-sm-3">
+          <!-- left -->
+          
+          <ul class="list-group">
+            {{#each related_skills}}
+              <li class="list-group-item {{relatedSelected}}">
+                <span class="badge">{{this.count}}</span>
+                {{this.name}}
+              </li>
+            {{/each}}
+          </ul>
+          
+        </div><!-- /span-3 -->
+        <div class="col-sm-9">
+          <div class="huge">{{fraction}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

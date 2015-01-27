@@ -1,0 +1,23 @@
+<template name="skill">
+  <div class="container">
+      <h2>{{display_name}}</h2>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          {{> count_module field="Jobs" number=this.jobs_count}}
+        </div>
+        <div class="col-md-6">
+          {{> count_module field="People" number=this.people_count}}
+        </div>
+      </div>
+
+      <div class="row">
+        {{> related_module}}
+      </div>
+
+      <div class="row">
+        {{> companies_module}}
+      </div>
+
+  </div>
+</template>
